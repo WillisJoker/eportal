@@ -10,6 +10,14 @@
 		部門名稱: <input type="text" name="name"> <input type="submit"
 			value="Submit">
 	</form>
-
+	<%
+	if (request.getAttribute("errorMessage") != null) {
+	%>
+	<div style="color: red;">
+		<%=request.getAttribute("errorMessage")%>
+	</div>
+	<%
+	}
+	%>
 </body>
 </html>

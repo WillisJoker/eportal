@@ -29,9 +29,14 @@ public class EportalController {
 
 	@PostMapping("/department/add")
 	public String addDepartment(Department department, Model model) {
-		departmentRepository.save(department);
-		model.addAttribute("department", department);
-		return "departmentDetails";
+		if (departmentRepository.existsByName(department.getName())) {
+			model.addAttribute("errorMessage", "部門名稱已經被新增");
+			return "addDepartment";
+		} else {
+			departmentRepository.save(department);
+			model.addAttribute("department", department);
+			return "departmentDetails";
+		}
 	}
 
 	@RequestMapping(value = "/employee")
